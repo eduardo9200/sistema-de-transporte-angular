@@ -1,9 +1,27 @@
-<ion-header>
+<ion-header class="ajustar-pagina">
   <ion-toolbar>
-    <ion-title>itinerarios</ion-title>
+    <ion-title>Itinerarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ajustar-pagina">
+  <ion-row>
+    <ion-col>
+      <ion-button
+        fill="solid"
+        (click)="chamarModalNovoItinerario()"
+      >
+      Novo
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <section>
+    <app-pesquisa-itinerario></app-pesquisa-itinerario>
+  </section>
+
+  <section>
+    <app-tabela></app-tabela>
+  </section>
 
 </ion-content>

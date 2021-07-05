@@ -17,7 +17,11 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },  {
+    path: 'linhas',
+    loadChildren: () => import('./linhas/linhas.module').then( m => m.LinhasPageModule)
   }
+
 ];
 @NgModule({
   imports: [
