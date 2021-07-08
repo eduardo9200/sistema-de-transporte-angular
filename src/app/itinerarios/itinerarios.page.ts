@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DadosBusca, ResultadoItinerario } from '../pesquisa/models/pesquisa.model';
+import { PesquisaItinerarioService } from '../pesquisa/services/pesquisa-itinerario.service';
 
 @Component({
   selector: 'app-itinerarios',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItinerariosPage implements OnInit {
 
-  constructor() { }
+  resultadoBusca: ResultadoItinerario[];
+
+  constructor(
+    private pesquisaItinerarioService: PesquisaItinerarioService
+  ) { }
 
   ngOnInit() {
   }
 
+  public buscar(event: DadosBusca) {
+    this.pesquisaItinerarioService
+    .buscaItinerario(event)
+    .subscribe(value => {
+      console.log('teste');
+    });
+    console.log(event);
+  }
 }

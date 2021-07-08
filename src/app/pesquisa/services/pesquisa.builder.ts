@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SearchItem } from '../models/pesquisa.model';
+import { SearchItem, TipoItemBusca } from '../models/pesquisa.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +11,15 @@ export class PesquisaBuilder {
   public getSearchOptions(): SearchItem[] {
     return [
       {
-        id: 1,
+        id: TipoItemBusca.NUMERO,
         descricao: 'Número'
       },
       {
-        id: 2,
+        id: TipoItemBusca.LINHA,
         descricao: 'Linha'
       },
       {
-        id: 3,
+        id: TipoItemBusca.LOGRADOURO,
         descricao: 'Logradouro'
       }
     ];

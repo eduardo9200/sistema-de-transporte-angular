@@ -17,11 +17,11 @@
   </ion-row>
 
   <section>
-    <app-pesquisa-itinerario></app-pesquisa-itinerario>
+    <app-pesquisa-itinerario (dadosBusca)="buscar($event)"></app-pesquisa-itinerario>
   </section>
 
   <section>
-    <app-tabela></app-tabela>
+    <app-tabela [resultadoBusca]="resultadoBusca"></app-tabela>
   </section>
 
 </ion-content>

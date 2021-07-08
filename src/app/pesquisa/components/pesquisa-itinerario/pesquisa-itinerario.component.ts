@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { SearchItem } from '../../models/pesquisa.model';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { DadosBusca, SearchItem } from '../../models/pesquisa.model';
 import { PesquisaBuilder } from '../../services/pesquisa.builder';
 
 @Component({
@@ -9,19 +10,43 @@ import { PesquisaBuilder } from '../../services/pesquisa.builder';
 })
 export class PesquisaItinerarioComponent implements OnInit {
 
+  @Output() dadosBusca = new EventEmitter<DadosBusca>();
+
   searchItemList: SearchItem[] = [];
+  itemSelecionado: SearchItem;
   valorPesquisa: string = '';
 
+  formPesquisa: FormGroup;
+
   constructor(
-    private pesquisaBuilder: PesquisaBuilder
+    private pesquisaBuilder: PesquisaBuilder,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     this.searchItemList = this.pesquisaBuilder.getSearchOptions();
+    this.criaFormulario();
+  }
+
+  private criaFormulario() {
+    this.formPesquisa = this.formBuilder.group({
+      textoPesquisa: [null]
+    });
+  }
+
+  get textoPesquisa(): FormControl {
+    return this.formPesquisa.get('textoPesquisa') as FormControl;
   }
 
   public selecionouPesquisa(event: CustomEvent) {
-    console.log(event.detail.value);
+    this.itemSelecionado = event.detail.value;
+  }
+
+  public pesquisar() {
+    this.dadosBusca.emit({
+      itemSelecionado: this.itemSelecionado,
+      textoBusca: this.textoPesquisa.value
+    });
   }
 
 }
