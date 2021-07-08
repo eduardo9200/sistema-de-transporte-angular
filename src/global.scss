@@ -28,3 +28,40 @@
 .ion-page {
     padding: 25px 50px;
 }
+
+/** Action Bar Modal **/
+.action-bar-modal.full-height .modal-wrapper {
+    height: 100%;
+}
+.action-bar-modal .modal-wrapper {
+  height: 90%;
+}
+  
+.action-bar-modal .modal-wrapper .ion-page {
+  padding: 0 40px 15px 45px !important;
+}
+  
+.action-bar-modal .modal-wrapper .ion-page ion-footer {
+  margin: 10px 0 !important;
+}
+  
+.action-bar-modal .modal-wrapper .ion-page .footer-md::before {
+  background-image: none !important;
+}
+  
+/* Modal login */
+.modal-login .modal-wrapper {
+  height: 461px;
+  width: 600px;
+}
+  
+/** Mobile media query to Action Bar Modal **/
+@media (max-width: 767px) {
+  .action-bar-modal .modal-wrapper, .modal-login .modal-wrapper {
+    height: 100%;
+  }
+  
+  .action-bar-modal .modal-wrapper .ion-page {
+    padding: 0 10px !important;
+  }
+}

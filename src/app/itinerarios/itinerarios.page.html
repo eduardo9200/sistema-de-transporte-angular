@@ -1,6 +1,6 @@
 <ion-header class="ajustar-pagina">
   <ion-toolbar>
-    <ion-title>Itinerarios</ion-title>
+    <ion-title>Itinerários</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,7 +20,7 @@
     <app-pesquisa-itinerario (dadosBusca)="buscar($event)"></app-pesquisa-itinerario>
   </section>
 
-  <section>
+  <section *ngIf="isMostrarResultado">
     <app-tabela [resultadoBusca]="resultadoBusca"></app-tabela>
   </section>
 

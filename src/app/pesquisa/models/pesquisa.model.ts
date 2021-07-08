@@ -10,11 +10,11 @@ export interface DadosBusca {
 
 export interface ResultadoItinerario {
     numeroLinha: number;
-    nomeLinha: number;
-    itinerario: string;
-    resumoItinerario: string;
-    sentido: Sentido;
-    linhaAtiva: boolean;
+    nomeLinha?: string;
+    itinerario?: string;
+    resumoItinerario?: string;
+    sentido?: Sentido;
+    linhaAtiva?: boolean;
 }
 
 export enum Sentido {

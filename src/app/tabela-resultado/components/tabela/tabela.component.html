@@ -1,3 +1,48 @@
-<p>
-  tabela works!
-</p>
+<ion-grid>
+  <ion-row *ngIf="resultadoBusca?.length > 0; else semResultados">
+    <ion-col size="6">
+      {{ resultadoBusca.length }} {{ resultadoBusca.length == 1 ? 'resultado' : 'resultados' }}
+    </ion-col>
+    <ion-col size="6"></ion-col>
+  </ion-row>
+
+  <!-- Cabeçalho -->
+  <ion-row>
+    <ion-col size="0.5" class="table-header--col">#</ion-col>
+    <ion-col size="1" class="table-header--col">Número</ion-col>
+    <ion-col size="4" class="table-header--col">Nome</ion-col>
+    <ion-col size="4.6" class="table-header--col">Resumo</ion-col>
+    <ion-col size="1" class="table-header--col">Sentido</ion-col>
+    <ion-col size="0.9" class="table-header--col">Detalhes</ion-col>
+  </ion-row>
+
+  <!-- Linhas -->
+  <ion-row *ngFor="let result of resultadoBusca; let i = index" class="table--row">
+    <ion-col size="0.5" class="flex--center">
+      {{ i + 1 }}
+    </ion-col>
+    <ion-col size="1" class="flex--center">
+      {{ result.numeroLinha }}
+    </ion-col>
+    <ion-col size="4">
+      {{ result.nomeLinha }}
+    </ion-col>
+    <ion-col size="4.6">
+      {{ result.resumoItinerario }}
+    </ion-col>
+    <ion-col size="1" class="flex--center">
+      {{ result.sentido == 'I' ? 'IDA' : (result.sentido == 'V' ? 'VOLTA' : '-') }}
+    </ion-col>
+    <ion-col size="0.9" class="flex--center">
+      <ion-button (click)="abrirModal(i)"><ion-icon name="eye"></ion-icon></ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ng-template #semResultados>
+  <ion-grid>
+    <ion-row>
+      <ion-col>Sem resultados</ion-col>
+    </ion-row>
+  </ion-grid>  
+</ng-template>
