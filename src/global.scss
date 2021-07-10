@@ -65,3 +65,13 @@
     padding: 0 10px !important;
   }
 }
+
+.item.sc-ion-label-md-h, .item .sc-ion-label-md-h{
+  white-space: normal !important;
+  //width: 100px;
+}
+
+/* COLORS */
+:root {
+  --ion-color-dark: #474747;
+}
