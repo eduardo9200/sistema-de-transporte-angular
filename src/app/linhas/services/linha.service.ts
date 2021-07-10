@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Linha } from 'src/app/linhas/models/linhas.model';
 import { environment } from 'src/environments/environment';
+import { Linha } from '../models/linhas.model';
 
 const urlAPI: string = `${environment.urlSistemaTransporteApi}/linha`;
 
 @Injectable({
   providedIn: 'root'
 })
-export class PesquisaLinhasService {
+export class LinhaService {
 
   constructor(private http: HttpClient) { }
 
