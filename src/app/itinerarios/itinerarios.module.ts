@@ -10,6 +10,7 @@ import { ItinerariosPage } from './itinerarios.page';
 import { SharedModule } from '../shared/shared.module';
 import { PesquisaModule } from '../pesquisa/pesquisa.module';
 import { TabelaResultadoModule } from '../tabela-resultado/tabela-resultado.module';
+import { CadastrarItinerarioComponent } from './components/cadastrar-itinerario/cadastrar-itinerario.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { TabelaResultadoModule } from '../tabela-resultado/tabela-resultado.modu
     PesquisaModule,
     TabelaResultadoModule
   ],
-  declarations: [ItinerariosPage]
+  declarations: [ItinerariosPage, CadastrarItinerarioComponent]
 })
 export class ItinerariosPageModule {}

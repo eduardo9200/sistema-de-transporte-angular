@@ -3,9 +3,10 @@ import { ModalOptions } from '@ionic/core';
 import { ModalController } from '@ionic/angular';
 import { DadosBusca, ResultadoItinerario } from '../pesquisa/models/pesquisa.model';
 import { ItinerarioService } from './services/itinerario.service';
-import { PesquisaLinhasService } from '../pesquisa/services/pesquisa-linhas.service';
 import { CadastrarItinerarioComponent } from './components/cadastrar-itinerario/cadastrar-itinerario.component';
 import { Linha } from '../linhas/models/linhas.model';
+import { OverlayService } from '../core/services/overlay.service';
+import { LinhaService } from '../linhas/services/linha.service';
 
 @Component({
   selector: 'app-itinerarios',
@@ -22,10 +23,13 @@ export class ItinerariosPage implements OnInit {
   constructor(
     private itinerarioService: ItinerarioService,
     private modalController: ModalController,
-    private pesquisaLinhasService: PesquisaLinhasService
+    private overlayService: OverlayService,
+    private linhaService: LinhaService
   ) { }
 
   ngOnInit() {
+    this.linhaService.buscaTodasLinhas()
+    .subscribe(linhas => this.linhas = linhas);
   }
 
   public buscar(event: DadosBusca) {
@@ -48,14 +52,17 @@ export class ItinerariosPage implements OnInit {
     ];
   }
 
-  public chamarModalNovoItinerario() {
+  public async chamarModalNovoItinerario() {
+    const loading = await this.overlayService.loading();
     console.log('chamando modal');
     this.chamarModal({
       component: CadastrarItinerarioComponent,
       componentProps: {
-        linhas: this.linhas
+        linhas: this.linhas,
+        disabled: false
       }
     });
+    loading.dismiss();
   }
 
   private async chamarModal(options: ModalOptions) {
