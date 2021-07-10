@@ -1,0 +1,30 @@
+ion-content, .radio--label {
+    font-size: 14px;
+}
+
+ion-grid {
+    margin: 20px 0;
+}
+
+ion-input, ion-textarea, ion-select {
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+ion-radio, ion-checkbox {
+    margin-right: 5px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.observacao {
+    font-size: 12px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
