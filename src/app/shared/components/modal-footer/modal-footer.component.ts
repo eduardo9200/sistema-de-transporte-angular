@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal-footer',
@@ -7,8 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalFooterComponent implements OnInit {
 
+  @Input() textButton: string = "";
+  @Input() disabled: boolean;
+  @Output() executarAcao = new EventEmitter<void>();
+
   constructor() { }
 
   ngOnInit() {}
+
+  public execute(): void {
+    this.executarAcao.emit();
+  }
 
 }

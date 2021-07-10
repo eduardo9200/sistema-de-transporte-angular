@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal-header',
@@ -7,8 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalHeaderComponent implements OnInit {
 
+  @Input() texto: string = "";
+  @Output() dismiss = new EventEmitter<void>();
+
   constructor() { }
 
   ngOnInit() {}
+
+  public fecharModal(): void {
+    this.dismiss.emit();
+  }
 
 }

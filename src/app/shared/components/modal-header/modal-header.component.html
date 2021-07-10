@@ -1,3 +1,17 @@
-<p>
-  modal-header works!
-</p>
+<ion-header>
+  <ion-grid>
+    <ion-row class="close-button centralizar">
+      <ion-icon
+        name="close"
+        class="close-button--icon"
+        (click)="fecharModal()"
+        ></ion-icon>
+    </ion-row>
+    <ion-row>
+      <ion-col class="centralizar">
+        <span class="texto">{{ texto }}</span>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-header>

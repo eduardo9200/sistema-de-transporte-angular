@@ -1,0 +1,19 @@
+.close-button {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.close-button--icon:hover {
+    cursor: pointer;
+}
+
+.centralizar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.texto {
+    font-size: 22px;
+    font-weight: bold;
+}
