@@ -1,9 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>linhas</ion-title>
+    <ion-title>Linhas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button
+          fill="solid"
+          (click)="chamarModalNovaLinha()"
+        >
+        Nova Linha
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  
+    <section>
+      <app-pesquisa-linhas (dadosBusca)="buscar($event)"></app-pesquisa-linhas>
+    </section>
+  
+    <section *ngIf="isMostrarResultado">
+      <app-tabela-linhas [linhas]="linhas" (deletarLinha)="deletarLinha($event)"></app-tabela-linhas>
+    </section>
+  </ion-grid>
 </ion-content>
