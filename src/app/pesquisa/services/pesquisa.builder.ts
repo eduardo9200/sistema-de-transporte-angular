@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SearchItem, TipoItemBusca } from '../models/pesquisa.model';
+import { DadosBusca, DadosBuscaLinha, SearchItem, SearchItemLinha, TipoItemBusca, TipoItemBuscaLinha } from '../models/pesquisa.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +23,32 @@ export class PesquisaBuilder {
         descricao: 'Logradouro'
       }
     ];
+  }
+
+  public getDadosBuscaTodos(): DadosBusca {
+    return {
+      itemSelecionado: { id: TipoItemBusca.TODOS, descricao: 'Todos' },
+      textoBusca: 'Todos'
+    }
+  }
+
+  public getSearchOptionsLinha(): SearchItemLinha[] {
+    return [
+      {
+        id: TipoItemBuscaLinha.NUMERO,
+        descricao: 'Número'
+      },
+      {
+        id: TipoItemBuscaLinha.NOME,
+        descricao: 'Nome'
+      }
+    ];
+  }
+
+  public getDadosBuscaTodasLinhas(): DadosBuscaLinha {
+    return {
+      itemSelecionado: { id: TipoItemBuscaLinha.TODAS, descricao: 'Todas' },
+      textoBusca: 'Todas'
+    }
   }
 }

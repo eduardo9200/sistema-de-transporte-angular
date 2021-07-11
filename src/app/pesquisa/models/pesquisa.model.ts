@@ -3,27 +3,29 @@ export interface SearchItem {
     descricao: string
 }
 
+export interface SearchItemLinha {
+    id: TipoItemBuscaLinha,
+    descricao: string;
+}
+
 export interface DadosBusca {
     itemSelecionado: SearchItem;
     textoBusca: string;
 }
 
-export interface ResultadoItinerario {
-    numeroLinha: number;
-    nomeLinha?: string;
-    itinerario?: string;
-    resumoItinerario?: string;
-    sentido?: Sentido;
-    linhaAtiva?: boolean;
-}
-
-export enum Sentido {
-    IDA = 'I',
-    VOLTA = 'V'
+export interface DadosBuscaLinha {
+    itemSelecionado: SearchItemLinha;
+    textoBusca: string;
 }
 
 export enum TipoItemBusca {
+    TODOS = 0,
     NUMERO = 1,
     LINHA = 2,
     LOGRADOURO = 3
+}
+export enum TipoItemBuscaLinha {
+    TODAS = 0,
+    NUMERO = 1,
+    NOME = 2
 }
