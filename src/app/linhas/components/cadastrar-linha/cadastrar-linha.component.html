@@ -1,0 +1,61 @@
+<app-modal-header
+  texto="Nova Linha"
+  (dismiss)="dismiss()"
+></app-modal-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-no-padding ion-no-margin">
+      <ion-col class="ion-text-right observacao">
+        * campos obrigatórios
+      </ion-col>
+    </ion-row>
+
+   <form [formGroup]="formCadastro">
+    <ion-row>
+      <ion-col>
+        <ion-label class="label">Número da Linha *</ion-label>
+        <ion-input
+          formControlName="numero"
+          type="number"
+          [readonly]="disabled"
+          [class.has-error]="(numero.touched || numero.dirty) && numero.invalid"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="form--row">
+      <ion-col>
+        <ion-label class="label">Nome da Linha *</ion-label>
+        <ion-input
+          formControlName="nome"
+          type="text"
+          [readonly]="disabled"
+          [class.has-error]="(nome.touched || nome.dirty) && nome.invalid"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="form--row">
+      <ion-col size="2.5">
+        <ion-label class="label">Linha ativa *</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-checkbox
+          formControlName="ativa"
+          [checked]="ativa.value"
+        ></ion-checkbox>
+      </ion-col>
+    </ion-row>
+   </form>
+  </ion-grid>
+</ion-content>
+
+<app-modal-footer
+  textButton="Salvar"
+  (executarAcao)="salvarLinha()"
+  [disabled]="!validaFormulario()"
+  textSecondButton="Editar"
+  (executarSegundaAcao)="editarLinha()"
+  [showSecondButton]="showSecondButton"
+></app-modal-footer>

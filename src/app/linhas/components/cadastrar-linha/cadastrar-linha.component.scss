@@ -1,0 +1,39 @@
+ion-content {
+    font-size: 14px;
+}
+
+ion-grid {
+    margin: 20px 0;
+}
+
+ion-input {
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+ion-checkbox {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.observacao {
+    font-size: 12px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.has-error {
+    border: 1px solid var(--ion-color-danger) !important;
+}
+
+.form--row {
+    margin-top: 15px;
+}
