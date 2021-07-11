@@ -1,3 +1,12 @@
 <ion-footer class="ion-no-padding">
-  <ion-button (click)="execute()" [disabled]="disabled">{{ textButton }}</ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="showSecondButton" size="3">
+        <ion-button (click)="execute2Btn()" color="secondary">{{ textSecondButton }}</ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button (click)="execute()" [disabled]="disabled" color="primary">{{ textButton }}</ion-button>    
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-footer>

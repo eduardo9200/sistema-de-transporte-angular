@@ -9,7 +9,11 @@ export class ModalFooterComponent implements OnInit {
 
   @Input() textButton: string = "";
   @Input() disabled: boolean;
+  @Input() showSecondButton: boolean = false;
+  @Input() textSecondButton: string = "";
+
   @Output() executarAcao = new EventEmitter<void>();
+  @Output() executarSegundaAcao = new EventEmitter<void>();
 
   constructor() { }
 
@@ -19,4 +23,7 @@ export class ModalFooterComponent implements OnInit {
     this.executarAcao.emit();
   }
 
+  public execute2Btn(): void {
+    this.executarSegundaAcao.emit();
+  }
 }
