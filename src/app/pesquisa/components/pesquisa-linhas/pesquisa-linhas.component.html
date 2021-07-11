@@ -1,3 +1,62 @@
-<p>
-  pesquisa-linhas works!
-</p>
+<ion-grid>
+  <ion-row>
+    <ion-label>
+      Selecione uma opção abaixo e pesquise uma linha.
+      <br>
+      <span class="detalhe">Caso apenas pressione o botão de pesquisa, aparecerão todas as linhas de ônibus.</span>
+    </ion-label>
+  </ion-row>
+
+  <form [formGroup]="formPesquisa">
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-radio-group (ionChange)="selecionouPesquisa($event)">
+            <ion-list-header class="ion-no-margin ion-no-padding">
+              <ion-label>Pesquisa por:</ion-label>
+            </ion-list-header>
+
+            <ion-row class="ion-no-padding ion-no-margin">
+              <ion-col
+                size-lg="1.5"
+                size-xs="12"
+                class="ion-no-padding ion-no-margin"
+                *ngFor="let item of searchItemList"
+              >
+                <ion-item lines="none" class="ion-no-padding ion-no-margin">
+                  <ion-label class="pesquisa--label">{{ item.descricao }}</ion-label>
+                  <ion-radio
+                    slot="start"
+                    [value]="item"
+                    class="ion-no-margin pesquisa--radio-button"
+                  ></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col
+        size-lg="5"
+        size-xs="12"
+      >
+        <ion-input
+          [type]="inputType"
+          formControlName="textoPesquisa"
+          placeholder="Texto da pesquisa"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <ion-row>
+    <ion-col>
+      <ion-button
+        (click)="pesquisar()"
+      >Pesquisar</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
