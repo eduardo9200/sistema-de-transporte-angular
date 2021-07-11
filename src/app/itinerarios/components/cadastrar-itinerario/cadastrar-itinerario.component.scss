@@ -28,3 +28,7 @@ ion-radio, ion-checkbox {
     align-items: center;
     justify-content: center;
 }
+
+.has-error {
+    border: 1px solid var(--ion-color-danger) !important;
+}

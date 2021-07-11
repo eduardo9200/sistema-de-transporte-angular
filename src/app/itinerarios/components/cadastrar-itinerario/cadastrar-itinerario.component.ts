@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ModalController } from '@ionic/angular';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 import { Linha } from 'src/app/linhas/models/linhas.model';
-import { Sentido } from 'src/app/pesquisa/models/pesquisa.model';
-import { Itinerario } from '../../models/itinerario.model';
+import { LinhaService } from 'src/app/linhas/services/linha.service';
+import { Itinerario, Sentido } from '../../models/itinerario.model';
 import { ItinerarioService } from '../../services/itinerario.service';
 
 @Component({
@@ -16,27 +16,42 @@ export class CadastrarItinerarioComponent implements OnInit {
 
   @Input() itinerarioCadastrado: Itinerario;
   @Input() linhas: Linha[] = [];
-  @Input() disabled: boolean = false;
+  @Input() openedFromTabela: boolean = false;
 
   formCadastro: FormGroup;
 
   sentido = Sentido;
-  isChecked: boolean = false;
+
+  disabled: boolean = false;
+  showSecondButton: boolean = false;
 
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private itinerarioService: ItinerarioService,
+    private linhaService: LinhaService,
     private overlayService: OverlayService
   ) { }
 
   ngOnInit() {
-    this.linhas = [];
-    this.linhas.push({id: 2, numero: 456, nome: 'Planalto Ayrton Senna/Expedicionários/Centro', ativa: true});
-    this.linhas.push({id: 1, numero: 123, nome: 'Teste 2', ativa: true});
-
+    this.buscaTodasAsLinhas();
     this.criarFormulario();
-    this.setValoresFormulario();
+
+    if(this.openedFromTabela) {
+      this.disabled = true;
+      this.showSecondButton = true;
+      this.linhaSelecionada.disable();
+    }
+  }
+
+  private buscaTodasAsLinhas() {
+    this.linhaService.buscaTodasLinhas()
+    .subscribe(linhas => {
+      this.linhas = linhas
+      if(this.itinerarioCadastrado) {
+        this.setValoresFormulario();
+      }
+    });
   }
 
   private criarFormulario() {
@@ -51,12 +66,19 @@ export class CadastrarItinerarioComponent implements OnInit {
   }
 
   private setValoresFormulario() {
-    this.linhaSelecionada.setValue(this.itinerarioCadastrado.linha);
-    this.itinerario.setValue(this.itinerarioCadastrado.descricao);
-    this.resumo.setValue(this.itinerarioCadastrado.resumo);
-    this.sentidoSelecionado.setValue(this.itinerarioCadastrado.sentido);
-    this.pontoInicial.setValue(this.itinerarioCadastrado.pontoInicial);
-    this.pontoFinal.setValue(this.itinerarioCadastrado.pontoFinal);
+    this.linhaSelecionada.setValue(this.itinerarioCadastrado?.linha.id);
+    this.itinerario.setValue(this.itinerarioCadastrado?.descricao);
+    this.resumo.setValue(this.itinerarioCadastrado?.resumo);
+    this.sentidoSelecionado.setValue(this.itinerarioCadastrado?.sentido);
+    this.pontoInicial.setValue(this.itinerarioCadastrado?.pontoInicial);
+    this.pontoFinal.setValue(this.itinerarioCadastrado?.pontoFinal);
+
+    this.linhaSelecionada.updateValueAndValidity();
+    this.itinerario.updateValueAndValidity();
+    this.resumo.updateValueAndValidity();
+    this.sentidoSelecionado.updateValueAndValidity();
+    this.pontoInicial.updateValueAndValidity();
+    this.pontoFinal.updateValueAndValidity();
   }
 
   get linhaSelecionada(): FormControl {
@@ -83,18 +105,8 @@ export class CadastrarItinerarioComponent implements OnInit {
     return this.formCadastro.get('pontoFinal') as FormControl;
   }
 
-  public selecionouLinha(event: CustomEvent) {
-    console.log(event.detail.value);
-  }
-
-  public selecionouSentido(event) {
-    console.log(event.detail.value);
-  }
-
-  public changeCheckbox() {
-    this.isChecked = !this.isChecked;
-
-    if(this.isChecked) {
+  public changeCheckbox(event) {
+    if(event.detail.checked) {
       this.ordenarLinhaPorNumero();
     } else {
       this.ordenarLinhaPorNome();
@@ -112,8 +124,11 @@ export class CadastrarItinerarioComponent implements OnInit {
   public async salvarItinerario() {
     const loading = await this.overlayService.loading();
 
+    const linhaSelecionadaObject: Linha = this.linhas.find(linha => linha.id === this.linhaSelecionada.value);
+
     const itinerarioObject: Itinerario = {
-      linha: this.linhaSelecionada.value,
+      id: this.itinerarioCadastrado ? this.itinerarioCadastrado.id : null,
+      linha: linhaSelecionadaObject,
       descricao: this.itinerario.value,
       resumo: this.resumo.value,
       sentido: this.sentidoSelecionado.value,
@@ -121,16 +136,20 @@ export class CadastrarItinerarioComponent implements OnInit {
       pontoInicial: this.pontoInicial.value
     }
     
-    console.log(itinerarioObject);
-    
     this.itinerarioService.salvaItinerario(itinerarioObject)
     .subscribe(() => {
       loading.dismiss();
+      this.dismiss();
       this.overlayService.toast({ message: 'Itinerário salvo com sucesso!' });
     }, error => {
       loading.dismiss();
       this.overlayService.toast({ message: 'Ops! Falha no salvamento do itinerário.' });
     });
+  }
+
+  public async editarItinerario() {
+    this.disabled = false;
+    this.linhaSelecionada.enable();
   }
 
   public validaFormulario(): boolean {
