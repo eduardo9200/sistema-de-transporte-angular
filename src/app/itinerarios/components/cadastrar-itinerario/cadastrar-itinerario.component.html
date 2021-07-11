@@ -1,5 +1,5 @@
 <app-modal-header
-  texto="Novo itinerário"
+  texto="Novo Itinerário"
   (dismiss)="dismiss()"
 ></app-modal-header>
 
@@ -21,16 +21,15 @@
           formControlName="linhaSelecionada"
           placeholder="Selecionar Linha..."
           interface="popover"
-          (ionChange)="selecionouLinha($event)"
-          [disabled]="disabled"
+          [class.has-error]="(linhaSelecionada.touched || linhaSelecionada.dirty) && linhaSelecionada.invalid"
         >
-          <ion-select-option *ngFor="let linha of linhas" [value]="linha">
+          <ion-select-option *ngFor="let linha of linhas" [value]="linha.id">
             {{ linha.numero }}-{{ linha.nome }}
           </ion-select-option>
         </ion-select>
       </ion-col>
       <ion-col size="3" class="checkbox">
-        <ion-checkbox (ionChange)="changeCheckbox()" [disabled]="disabled"></ion-checkbox>
+        <ion-checkbox (ionChange)="changeCheckbox($event)" [disabled]="disabled"></ion-checkbox>
         <ion-label>Ord. p/ Núm.</ion-label>
       </ion-col>
     </ion-row>
@@ -38,14 +37,24 @@
     <ion-row>
       <ion-col>
         <ion-label class="label">Itinerário completo *</ion-label>
-        <ion-textarea formControlName="itinerario" rows="10" [readonly]="disabled"></ion-textarea>
+        <ion-textarea
+          formControlName="itinerario"
+          rows="10"
+          [readonly]="disabled"
+          [class.has-error]="(itinerario.touched || itinerario.dirty) && itinerario.invalid"
+        ></ion-textarea>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
         <ion-label class="label">Resumo do Itinerário *</ion-label>
-        <ion-input formControlName="resumo" type="text" [readonly]="disabled"></ion-input>
+        <ion-input
+          formControlName="resumo"
+          type="text"
+          [readonly]="disabled"
+          [class.has-error]="(resumo.touched || resumo.dirty) && resumo.invalid"
+        ></ion-input>
       </ion-col>
     </ion-row>
 
@@ -54,7 +63,7 @@
         <ion-label class="label">Sentido *</ion-label>
         <ion-radio-group
           formControlName="sentidoSelecionado"
-          (ionChange)="selecionouSentido($event)"
+          [class.has-error]="(sentidoSelecionado.touched || sentidoSelecionado.dirty) && sentidoSelecionado.invalid"
         >
           <ion-row class="ion-no-padding ion-no-margin">
             <ion-col size="3">
@@ -76,15 +85,25 @@
 
     <ion-row>
       <ion-col>
-        <ion-label class="label">Endereço Ponto Final *</ion-label>
-        <ion-input formControlName="pontoFinal" type="text" [readonly]="disabled"></ion-input>
+        <ion-label class="label">Endereço Ponto Inicial *</ion-label>
+        <ion-input
+          formControlName="pontoInicial"
+          type="text"
+          [readonly]="disabled"
+          [class.has-error]="(pontoInicial.touched || pontoInicial.dirty) && pontoInicial.invalid"
+        ></ion-input>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-label class="label">Endereço Ponto Inicial *</ion-label>
-        <ion-input formControlName="pontoInicial" type="text" [readonly]="disabled"></ion-input>
+        <ion-label class="label">Endereço Ponto Final *</ion-label>
+        <ion-input
+          formControlName="pontoFinal"
+          type="text"
+          [readonly]="disabled"
+          [class.has-error]="(pontoFinal.touched || pontoFinal.dirty) && pontoFinal.invalid"
+        ></ion-input>
       </ion-col>
     </ion-row>
    </form>
@@ -95,4 +114,7 @@
   textButton="Salvar"
   (executarAcao)="salvarItinerario()"
   [disabled]="!validaFormulario()"
+  textSecondButton="Editar"
+  (executarSegundaAcao)="editarItinerario()"
+  [showSecondButton]="showSecondButton"
 ></app-modal-footer>
