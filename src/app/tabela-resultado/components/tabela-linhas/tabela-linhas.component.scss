@@ -1,0 +1,32 @@
+.table-header--col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00008b;
+    font-weight: bold;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.table--row {
+    border-bottom: 1px solid #000;
+}
+
+.flex--center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex--middle {
+    display: flex;
+    align-items: center;
+}
+
+.inativa {
+    color: var(--ion-color-danger);
+}
+
+ion-col.cursor-pointer:hover {
+    cursor: pointer;
+}
