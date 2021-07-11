@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DadosBusca, ResultadoItinerario } from 'src/app/pesquisa/models/pesquisa.model';
+import { DadosBusca } from 'src/app/pesquisa/models/pesquisa.model';
 import { environment } from 'src/environments/environment';
 import { Itinerario } from '../models/itinerario.model';
 
@@ -18,7 +18,11 @@ export class ItinerarioService {
     return this.http.post<any>(`${urlAPI}/salva-itinerario`, itinerario);
   }
 
-  public buscaItinerario(dadosBusca: DadosBusca): Observable<ResultadoItinerario[]> {
-    return this.http.get<ResultadoItinerario[]>(`${urlAPI}/pesquisar/${dadosBusca.itemSelecionado.id}/${dadosBusca.textoBusca}`);
+  public deleteItinerario(itinerario: Itinerario): Observable<any> {
+    return this.http.delete<any>(`${urlAPI}/delete/id/${itinerario.id}`);
+  }
+
+  public buscaItinerario(dadosBusca: DadosBusca): Observable<Itinerario[]> {
+    return this.http.get<Itinerario[]>(`${urlAPI}/pesquisar/${dadosBusca.itemSelecionado.id}/${dadosBusca.textoBusca}`);
   }
 }

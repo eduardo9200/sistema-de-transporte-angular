@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalOptions } from '@ionic/core';
 import { ModalController } from '@ionic/angular';
-import { DadosBusca, ResultadoItinerario } from '../pesquisa/models/pesquisa.model';
+import { DadosBusca } from '../pesquisa/models/pesquisa.model';
 import { ItinerarioService } from './services/itinerario.service';
 import { CadastrarItinerarioComponent } from './components/cadastrar-itinerario/cadastrar-itinerario.component';
 import { Linha } from '../linhas/models/linhas.model';
 import { OverlayService } from '../core/services/overlay.service';
-import { LinhaService } from '../linhas/services/linha.service';
+import { PesquisaBuilder } from '../pesquisa/services/pesquisa.builder';
+import { Itinerario } from './models/itinerario.model';
 
 @Component({
   selector: 'app-itinerarios',
@@ -15,7 +16,7 @@ import { LinhaService } from '../linhas/services/linha.service';
 })
 export class ItinerariosPage implements OnInit {
 
-  resultadoBusca: ResultadoItinerario[];
+  itinerarios: Itinerario[];
   isMostrarResultado: boolean = false;
   modal: HTMLIonModalElement;
   linhas: Linha[];
@@ -24,37 +25,53 @@ export class ItinerariosPage implements OnInit {
     private itinerarioService: ItinerarioService,
     private modalController: ModalController,
     private overlayService: OverlayService,
-    private linhaService: LinhaService
+    private pesquisaBuilder: PesquisaBuilder
   ) { }
 
-  ngOnInit() {
-    this.linhaService.buscaTodasLinhas()
-    .subscribe(linhas => this.linhas = linhas);
-  }
+  ngOnInit() {}
 
-  public buscar(event: DadosBusca) {
-    this.isMostrarResultado = true;
-    /*this.itinerarioService
+  public async buscar(event: DadosBusca) {
+    const loading = await this.overlayService.loading();
+
+    if(event.itemSelecionado == undefined && event.textoBusca == null) {
+      event = this.pesquisaBuilder.getDadosBuscaTodos();
+    }
+
+    this.itinerarioService
     .buscaItinerario(event)
     .subscribe(resultadoList => {
-      this.resultadoBusca = resultadoList;
-    });*/
-    this.resultadoBusca = [
-      {
-        numeroLinha: 123
-      },
-      {
-        numeroLinha: 321
-      },
-      {
-        numeroLinha: 456
-      }
-    ];
+      this.itinerarios = resultadoList;
+      this.isMostrarResultado = true;
+      loading.dismiss();
+    }, error => {
+      this.overlayService.toast({ message: `Ops! Falha na busca de um itinerário.` });
+      loading.dismiss();
+    });
+  }
+
+  public async deletarItinerario(event: Itinerario) {
+    const loading = await this.overlayService.loading();
+
+    this.itinerarioService.deleteItinerario(event)
+    .subscribe(() => {
+      this.overlayService.toast({ message: `Itinerário deletado com sucesso.` });
+      this.removeElementoDoArray(this.itinerarios, event);
+      loading.dismiss();
+    }, error => {
+      this.overlayService.toast({ message: `Ops! Falha ao deletar itinerário.` });
+      loading.dismiss();
+    });
+  }
+
+  private removeElementoDoArray(itinerarios: Itinerario[], itinerario: Itinerario): void {
+    const index = itinerarios.indexOf(itinerario);
+    if(index > -1) {
+      itinerarios.splice(index, 1);
+    }
   }
 
   public async chamarModalNovoItinerario() {
     const loading = await this.overlayService.loading();
-    console.log('chamando modal');
     this.chamarModal({
       component: CadastrarItinerarioComponent,
       componentProps: {
