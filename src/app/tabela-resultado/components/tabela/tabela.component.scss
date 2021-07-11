@@ -17,3 +17,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.flex--middle {
+    display: flex;
+    align-items: center;
+}
+
+ion-col.cursor-pointer:hover {
+    cursor: pointer;
+}

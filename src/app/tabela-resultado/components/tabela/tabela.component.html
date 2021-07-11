@@ -1,7 +1,7 @@
 <ion-grid>
-  <ion-row *ngIf="resultadoBusca?.length > 0; else semResultados">
+  <ion-row *ngIf="itinerarios?.length > 0; else semResultados">
     <ion-col size="6">
-      {{ resultadoBusca.length }} {{ resultadoBusca.length == 1 ? 'resultado' : 'resultados' }}
+      {{ itinerarios.length }} {{ itinerarios.length == 1 ? 'resultado' : 'resultados' }}
     </ion-col>
     <ion-col size="6"></ion-col>
   </ion-row>
@@ -10,31 +10,32 @@
   <ion-row>
     <ion-col size="0.5" class="table-header--col">#</ion-col>
     <ion-col size="1" class="table-header--col">Número</ion-col>
-    <ion-col size="4" class="table-header--col">Nome</ion-col>
-    <ion-col size="4.6" class="table-header--col">Resumo</ion-col>
+    <ion-col size="4" class="table-header--col cursor-pointer" (click)="ordenaPorNome()">Nome</ion-col>
+    <ion-col size="4" class="table-header--col cursor-pointer" (click)="ordenaPorNumero()">Resumo</ion-col>
     <ion-col size="1" class="table-header--col">Sentido</ion-col>
-    <ion-col size="0.9" class="table-header--col">Detalhes</ion-col>
+    <ion-col size="1.5" class="table-header--col">Detalhes</ion-col>
   </ion-row>
 
   <!-- Linhas -->
-  <ion-row *ngFor="let result of resultadoBusca; let i = index" class="table--row">
+  <ion-row *ngFor="let result of itinerarios; let i = index" class="table--row">
     <ion-col size="0.5" class="flex--center">
       {{ i + 1 }}
     </ion-col>
     <ion-col size="1" class="flex--center">
-      {{ result.numeroLinha }}
+      {{ result.linha.numero < 100 ? '0' : '' }}{{ result.linha.numero }}
     </ion-col>
-    <ion-col size="4">
-      {{ result.nomeLinha }}
+    <ion-col size="4" class="flex--middle">
+      {{ result.linha.nome }}
     </ion-col>
-    <ion-col size="4.6">
-      {{ result.resumoItinerario }}
+    <ion-col size="4" class="flex--middle">
+      {{ result.resumo }}
     </ion-col>
     <ion-col size="1" class="flex--center">
-      {{ result.sentido == 'I' ? 'IDA' : (result.sentido == 'V' ? 'VOLTA' : '-') }}
+      {{ result.sentido == 'IDA' ? 'IDA' : (result.sentido == 'VOLTA' ? 'VOLTA' : '-') }}
     </ion-col>
-    <ion-col size="0.9" class="flex--center">
-      <ion-button (click)="abrirModal(i)"><ion-icon name="eye"></ion-icon></ion-button>
+    <ion-col size="1.5" class="flex--center">
+      <ion-button (click)="abrirModal(i)" color="primary"><ion-icon name="eye"></ion-icon></ion-button>
+      <ion-button (click)="delete(i)" color="danger"><ion-icon name="close"></ion-icon></ion-button>
     </ion-col>
   </ion-row>
 </ion-grid>

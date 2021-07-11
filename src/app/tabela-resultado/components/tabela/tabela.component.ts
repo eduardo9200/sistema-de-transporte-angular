@@ -1,8 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalOptions } from '@ionic/core';
 import { ModalController } from '@ionic/angular';
-import { ResultadoItinerario } from 'src/app/pesquisa/models/pesquisa.model';
-import { PesquisaHorariosComponent } from 'src/app/pesquisa/components/pesquisa-horarios/pesquisa-horarios.component';
+import { OverlayService } from 'src/app/core/services/overlay.service';
+import { CadastrarItinerarioComponent } from 'src/app/itinerarios/components/cadastrar-itinerario/cadastrar-itinerario.component';
+import { Itinerario } from 'src/app/itinerarios/models/itinerario.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tabela',
@@ -11,23 +13,65 @@ import { PesquisaHorariosComponent } from 'src/app/pesquisa/components/pesquisa-
 })
 export class TabelaComponent implements OnInit {
 
-  @Input() resultadoBusca: ResultadoItinerario[] = [];
+  @Input() itinerarios: Itinerario[];
+  @Output() deletarItinerario = new EventEmitter<Itinerario>();
 
   modal: HTMLIonModalElement;
 
   constructor(
-    private modalController: ModalController
+    private modalController: ModalController,
+    private overlayService: OverlayService
   ) { }
 
   ngOnInit() {}
 
-  public abrirModal(i: number) {
-    const resultado = this.resultadoBusca[i];
+  public async abrirModal(i: number) {
+    const loading = await this.overlayService.loading();
+    const itinerarioCadastrado = this.itinerarios[i];
     this.chamarModal({
-      component: PesquisaHorariosComponent,
+      component: CadastrarItinerarioComponent,
       componentProps: {
-        resultado
+        itinerarioCadastrado,
+        openedFromTabela: true
       } 
+    });
+    loading.dismiss();
+  }
+
+  public ordenaPorNumero(): void {
+    this.itinerarios = this.itinerarios.sort((a, b) => a.linha.numero > b.linha.numero ? 1 : (b.linha.numero > a.linha.numero ? -1 : 0));
+  }
+
+  public ordenaPorNome(): void {
+    this.itinerarios = this.itinerarios.sort((a, b) => a.linha.nome > b.linha.nome ? 1 : (b.linha.nome > a.linha.nome ? -1 : 0));
+  }
+
+  public async delete(i: number) {
+    Swal.fire({
+      title: 'Deletar itinerário?',
+      html: 'Lembre-se: esta ação não poderá ser desfeita.',
+      icon: 'warning',
+      confirmButtonColor: '#f08e81',
+      confirmButtonText: 'Sim, confirmo',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true,
+      heightAuto: false,
+      allowOutsideClick: false,
+      backdrop: false,
+      customClass: {
+        title: 'font-titulo-sweet-alert',
+        icon: 'icon--sweet-alert',
+        container: 'font--sweet-alert container--sweet-alert',
+        confirmButton: 'font-titulo-sweet-alert button-confirm-sweet-alert',
+        cancelButton: 'font-titulo-sweet-alert button-cancel-sweet-alert',
+      }
+    }).then((result) => {
+      if (result.value) {
+        this.deletarItinerario.emit(this.itinerarios[i]);
+      } else {
+        return false;
+      }
     });
   }
 
