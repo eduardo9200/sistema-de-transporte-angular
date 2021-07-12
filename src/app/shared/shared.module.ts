@@ -4,23 +4,26 @@ import { ModalHeaderComponent } from './components/modal-header/modal-header.com
 import { ModalFooterComponent } from './components/modal-footer/modal-footer.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
-
+import { RemoveUnderlinePipe } from './pipes/remove-underline.pipe';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
     ModalHeaderComponent,
-    ModalFooterComponent
+    ModalFooterComponent,
+    RemoveUnderlinePipe
   ],
   imports: [
-    CommonModule, FormsModule, IonicModule
+    CommonModule, FormsModule, IonicModule, MatTooltipModule
   ],
   exports: [
     ReactiveFormsModule,
     FormsModule,
     IonicModule,
     ModalHeaderComponent,
-    ModalFooterComponent
+    ModalFooterComponent,
+    RemoveUnderlinePipe,
+    MatTooltipModule
   ]
 })
 export class SharedModule { }
