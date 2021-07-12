@@ -22,7 +22,7 @@
     </section>
   
     <section *ngIf="isMostrarResultado">
-      <app-tabela [itinerarios]="itinerarios" (deletarItinerario)="deletarItinerario($event)"></app-tabela>
+      <app-tabela-itinerarios [itinerarios]="itinerarios" (deletarItinerario)="deletarItinerario($event)"></app-tabela-itinerarios>
     </section>
   </ion-grid>
 </ion-content>
