@@ -34,16 +34,17 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col size="4"></ion-col>
-      <ion-col size="2" class="ion-text-center">Início</ion-col>
-      <ion-col size="2" class="ion-text-center">Fim</ion-col>
+    <ion-row class="header--row">
+      <ion-col size="3"></ion-col>
+      <ion-col size="2" class="header--col">Início</ion-col>
+      <ion-col size="2" class="header--col">Fim</ion-col>
+      <ion-col size="2" class="header--col">Intervalo<br>(minutos)</ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size="4" class="label--col">
+    <ion-row class="body--row">
+      <ion-col size="3" class="label--col">
         <ion-label class="label">Dias úteis *:</ion-label>
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="form--col">
         <ion-input
           formControlName="uteisInicio"
           type="time"
@@ -51,7 +52,7 @@
           [class.has-error]="(uteisInicio.touched || uteisInicio.dirty) && uteisInicio.invalid"
         ></ion-input>
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="form--col">
         <ion-input
           formControlName="uteisFim"
           type="time"
@@ -59,13 +60,21 @@
           [class.has-error]="(uteisFim.touched || uteisFim.dirty) && uteisFim.invalid"
         ></ion-input>
       </ion-col>
+      <ion-col size="2" class="form--col">
+        <ion-input
+          formControlName="uteisIntervalo"
+          type="number"
+          [readonly]="disabled"
+          [class.has-error]="(uteisIntervalo.touched || uteisIntervalo.dirty) && uteisIntervalo.invalid"
+        ></ion-input>
+      </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col size="4" class="label--col">
+    <ion-row class="body--row">
+      <ion-col size="3" class="label--col">
         <ion-label class="label">Sábados *:</ion-label>
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="form--col">
         <ion-input
           formControlName="sabadosInicio"
           type="time"
@@ -73,7 +82,7 @@
           [class.has-error]="(sabadosInicio.touched || sabadosInicio.dirty) && sabadosInicio.invalid"
         ></ion-input>
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="form--col">
         <ion-input
           formControlName="sabadosFim"
           type="time"
@@ -81,13 +90,21 @@
           [class.has-error]="(sabadosFim.touched || sabadosFim.dirty) && sabadosFim.invalid"
         ></ion-input>
       </ion-col>
+      <ion-col size="2" class="form--col">
+        <ion-input
+          formControlName="sabadosIntervalo"
+          type="number"
+          [readonly]="disabled"
+          [class.has-error]="(sabadosIntervalo.touched || sabadosIntervalo.dirty) && sabadosIntervalo.invalid"
+        ></ion-input>
+      </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col size="4" class="label--col">
-        <ion-label class="label">Domingos e Feriados *:</ion-label>
+    <ion-row class="body--row">
+      <ion-col size="3" class="label--col">
+        <ion-label class="label">Domingos e<br>Feriados *:</ion-label>
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="form--col">
         <ion-input
           formControlName="domingosInicio"
           type="time"
@@ -95,12 +112,20 @@
           [class.has-error]="(domingosInicio.touched || domingosInicio.dirty) && domingosInicio.invalid"
         ></ion-input>
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="form--col">
         <ion-input
           formControlName="domingosFim"
           type="time"
           [readonly]="disabled"
           [class.has-error]="(domingosFim.touched || domingosFim.dirty) && domingosFim.invalid"
+        ></ion-input>
+      </ion-col>
+      <ion-col size="2" class="form--col">
+        <ion-input
+          formControlName="domingosIntervalo"
+          type="number"
+          [readonly]="disabled"
+          [class.has-error]="(domingosIntervalo.touched || domingosIntervalo.dirty) && domingosIntervalo.invalid"
         ></ion-input>
       </ion-col>
     </ion-row>

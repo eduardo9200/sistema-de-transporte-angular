@@ -15,7 +15,15 @@ ion-checkbox {
     margin-right: 5px;
 }
 
-.label {
+.header--row {
+    margin-top: 20px;
+}
+
+.body--row:hover {
+    background-color: #f0ffff;
+}
+
+.label, .header--col {
     font-weight: bold;
 }
 
@@ -28,7 +36,7 @@ ion-checkbox {
     font-size: 12px;
 }
 
-.checkbox {
+.checkbox, .header--col, .form--col {
     display: flex;
     align-items: center;
     justify-content: center;

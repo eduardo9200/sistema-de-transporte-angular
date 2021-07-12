@@ -57,10 +57,13 @@ export class CadastrarHorarioComponent implements OnInit {
       linhaSelecionada: [null, Validators.required],
       uteisInicio: [null, Validators.required],
       uteisFim: [null, Validators.required],
+      uteisIntervalo: [null, Validators.required],
       sabadosInicio: [null, Validators.required],
       sabadosFim: [null, Validators.required],
+      sabadosIntervalo: [null, Validators.required],
       domingosInicio: [null, Validators.required],
-      domingosFim: [null, Validators.required]
+      domingosFim: [null, Validators.required],
+      domingosIntervalo: [null, Validators.required]
     });
   }
 
@@ -68,18 +71,24 @@ export class CadastrarHorarioComponent implements OnInit {
     this.linhaSelecionada.setValue(this.horarioCadastrado?.linha.id);
     this.uteisInicio.setValue(this.horarioCadastrado?.inicioDiaUtil);
     this.uteisFim.setValue(this.horarioCadastrado?.fimDiaUtil);
+    this.uteisIntervalo.setValue(this.horarioCadastrado?.intervaloDiaUtil);
     this.sabadosInicio.setValue(this.horarioCadastrado?.inicioSabado);
     this.sabadosFim.setValue(this.horarioCadastrado?.fimSabado);
+    this.sabadosIntervalo.setValue(this.horarioCadastrado?.intervaloSabado);
     this.domingosInicio.setValue(this.horarioCadastrado?.inicioDomingoEFeriado);
     this.domingosFim.setValue(this.horarioCadastrado?.fimDomingoEFeriado);
+    this.domingosIntervalo.setValue(this.horarioCadastrado?.intervaloDomingoEFeriado);
 
     this.linhaSelecionada.updateValueAndValidity();
     this.uteisInicio.updateValueAndValidity();
     this.uteisFim.updateValueAndValidity();
+    this.uteisIntervalo.updateValueAndValidity();
     this.sabadosInicio.updateValueAndValidity();
     this.sabadosFim.updateValueAndValidity();
+    this.sabadosIntervalo.updateValueAndValidity();
     this.domingosInicio.updateValueAndValidity();
     this.domingosFim.updateValueAndValidity();
+    this.domingosIntervalo.updateValueAndValidity();
   }
 
   get linhaSelecionada(): FormControl {
@@ -94,6 +103,10 @@ export class CadastrarHorarioComponent implements OnInit {
     return this.formCadastro.get('uteisFim') as FormControl;
   }
 
+  get uteisIntervalo(): FormControl {
+    return this.formCadastro.get('uteisIntervalo') as FormControl;
+  }
+
   get sabadosInicio(): FormControl {
     return this.formCadastro.get('sabadosInicio') as FormControl;
   }
@@ -102,12 +115,20 @@ export class CadastrarHorarioComponent implements OnInit {
     return this.formCadastro.get('sabadosFim') as FormControl;
   }
 
+  get sabadosIntervalo(): FormControl {
+    return this.formCadastro.get('sabadosIntervalo') as FormControl;
+  }
+
   get domingosInicio(): FormControl {
     return this.formCadastro.get('domingosInicio') as FormControl;
   }
 
   get domingosFim(): FormControl {
     return this.formCadastro.get('domingosFim') as FormControl;
+  }
+
+  get domingosIntervalo(): FormControl {
+    return this.formCadastro.get('domingosIntervalo') as FormControl;
   }
 
   public changeCheckbox(event) {
@@ -135,11 +156,14 @@ export class CadastrarHorarioComponent implements OnInit {
       id: this.horarioCadastrado ? this.horarioCadastrado.id : null,
       linha: linhaSelecionadaObject,
       inicioDiaUtil: this.uteisInicio.value,
-      fimDiaUtil: this.uteisFim.value,
       inicioSabado: this.sabadosInicio.value,
-      fimSabado: this.sabadosFim.value,
       inicioDomingoEFeriado: this.domingosInicio.value,
-      fimDomingoEFeriado: this.domingosFim.value
+      fimDiaUtil: this.uteisFim.value,
+      fimSabado: this.sabadosFim.value,
+      fimDomingoEFeriado: this.domingosFim.value,
+      intervaloDiaUtil: this.uteisIntervalo.value,
+      intervaloSabado: this.sabadosIntervalo.value,
+      intervaloDomingoEFeriado: this.domingosIntervalo.value
     }
     
     this.horarioService.salvaHorario(horarioObject)
