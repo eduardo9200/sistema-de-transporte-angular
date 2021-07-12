@@ -7,11 +7,11 @@ import { Itinerario } from 'src/app/itinerarios/models/itinerario.model';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-tabela',
-  templateUrl: './tabela.component.html',
-  styleUrls: ['./tabela.component.scss'],
+  selector: 'app-tabela-itinerarios',
+  templateUrl: './tabela-itinerarios.component.html',
+  styleUrls: ['./tabela-itinerarios.component.scss'],
 })
-export class TabelaComponent implements OnInit {
+export class TabelaItinerariosComponent implements OnInit {
 
   @Input() itinerarios: Itinerario[];
   @Output() deletarItinerario = new EventEmitter<Itinerario>();

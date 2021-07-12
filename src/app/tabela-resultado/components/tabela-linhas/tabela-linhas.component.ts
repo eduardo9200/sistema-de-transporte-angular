@@ -46,6 +46,10 @@ export class TabelaLinhasComponent implements OnInit {
     this.linhas = this.linhas.sort((a, b) => a.nome > b.nome ? 1 : (b.nome > a.nome ? -1 : 0));
   }
 
+  public ordenaPorTipo(): void {
+    this.linhas = this.linhas.sort((a, b) => a.tipo > b.tipo ? 1 : (b.tipo > a.tipo ? -1 : 0));
+  }
+
   public async delete(i: number) {
     Swal.fire({
       title: 'Deletar linha?',

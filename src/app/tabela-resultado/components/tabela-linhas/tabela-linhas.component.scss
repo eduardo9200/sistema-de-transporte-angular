@@ -12,6 +12,10 @@
     border-bottom: 1px solid #000;
 }
 
+.table--row:hover {
+    background-color: #f0ffff;
+}
+
 .flex--center {
     display: flex;
     align-items: center;
