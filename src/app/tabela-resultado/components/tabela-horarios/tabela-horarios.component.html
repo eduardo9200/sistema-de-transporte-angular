@@ -1,3 +1,58 @@
-<p>
-  tabela-horarios works!
-</p>
+<ion-grid>
+  <ion-row *ngIf="horarios?.length > 0; else semResultados">
+    <ion-col size="6">
+      {{ horarios.length }} {{ horarios.length == 1 ? 'resultado' : 'resultados' }}
+    </ion-col>
+    <ion-col size="6"></ion-col>
+  </ion-row>
+
+  <!-- Cabeçalho -->
+  <ion-row>
+    <ion-col size="0.5" class="table-header--col">#</ion-col>
+    <ion-col size="1" class="table-header--col cursor-pointer" (click)="ordenaPorNumero()">Número</ion-col>
+    <ion-col size="4" class="table-header--col cursor-pointer" (click)="ordenaPorNome()">Nome</ion-col>
+    <ion-col size="2" class="table-header--col">Ativa</ion-col>
+    <ion-col size="3" class="table-header--col">Horários</ion-col>
+    <ion-col size="1.5" class="table-header--col">Opções</ion-col>
+  </ion-row>
+
+  <!-- Linhas -->
+  <ion-row *ngFor="let result of horarios; let i = index" class="table--row" [class.inativa]="!result.linha.ativa">
+    <ion-col size="0.5" class="flex--center">
+      {{ i + 1 }}
+    </ion-col>
+    <ion-col size="1" class="flex--center">
+      {{ result.linha.numero < 100 ? '0' : '' }}{{ result.linha.numero }}
+    </ion-col>
+    <ion-col size="4" class="flex--middle">
+      {{ result.linha.nome }}
+    </ion-col>
+    <ion-col size="2" class="flex--center">
+      {{ result.linha.ativa ? 'ATIVA' : 'INATIVA' }}
+    </ion-col>
+    <ion-col size="3" class="flex--center">
+      <ion-row>
+        <ion-col size="11">
+          <ion-label>Dias úteis:</ion-label> de {{ result.inicioDiaUtil }}h até {{ result.fimDiaUtil }}h;<br>
+          <ion-label>Sábados:</ion-label> de {{ result.inicioSabado }}h até {{ result.fimSabado }}h;<br>
+          <ion-label>Domingos e Feriados:</ion-label> de {{ result.inicioDomingoEFeriado }}h até {{ result.fimDomingoEFeriado }}h.
+        </ion-col>
+        <ion-col size="1">
+          <ion-button (click)="abrirModalHorarios(i)" color="primary"><ion-icon name="eye"></ion-icon></ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="1.5" class="flex--center">
+      <ion-button (click)="abrirModal(i)" color="primary"><ion-icon name="eye"></ion-icon></ion-button>
+      <ion-button (click)="delete(i)" color="danger"><ion-icon name="close"></ion-icon></ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ng-template #semResultados>
+  <ion-grid>
+    <ion-row>
+      <ion-col>Sem resultados</ion-col>
+    </ion-row>
+  </ion-grid>  
+</ng-template>
