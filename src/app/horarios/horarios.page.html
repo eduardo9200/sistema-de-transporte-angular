@@ -5,5 +5,24 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button
+          fill="solid"
+          (click)="chamarModalNovoHorario()"
+        >
+        Criar Novo Horário
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  
+    <section>
+      <app-pesquisa-horarios (dadosBusca)="buscar($event)"></app-pesquisa-horarios>
+    </section>
+  
+    <section *ngIf="isMostrarResultado">
+      <app-tabela-horarios [horarios]="horarios" (deletarHorario)="deletarHorario($event)"></app-tabela-horarios>
+    </section>
+  </ion-grid>
 </ion-content>
