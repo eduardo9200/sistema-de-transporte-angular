@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Sentido } from '../itinerarios/models/itinerario.model';
+import { Linha, TipoLinha } from '../linhas/models/linhas.model';
+import { TabelaHome } from './models/home.model';
+import { HomeService } from './services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  dataList: TabelaHome[] = [];
+
+  constructor(private homeService: HomeService) { }
 
   ngOnInit() {
+    this.homeService.montaTabelaHome()
+    .subscribe(resultList => this.dataList = resultList);
   }
 
 }

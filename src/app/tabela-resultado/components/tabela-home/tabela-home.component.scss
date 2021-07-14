@@ -1,0 +1,49 @@
+.table-header--col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00008b;
+    font-weight: bold;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.table--row {
+    border-bottom: 1px solid #000;
+    font-size: 11pt;
+}
+
+.table--row:hover {
+    background-color: #f0ffff;
+}
+
+.flex--center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex--middle {
+    display: flex;
+    align-items: center;
+}
+
+ion-col.cursor-pointer:hover {
+    cursor: pointer;
+}
+
+ul > li {
+    font-size: 10pt;
+}
+
+ul.list {
+    margin: 0;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding: 0;
+    padding-left: 25px;
+}
+
+.label--dia {
+    font-weight: bold;
+}
