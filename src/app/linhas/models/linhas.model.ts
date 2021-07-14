@@ -1,5 +1,5 @@
 export interface Linha {
-    id: number;
+    id?: number;
     numero: number;
     nome: string;
     ativa: boolean;
