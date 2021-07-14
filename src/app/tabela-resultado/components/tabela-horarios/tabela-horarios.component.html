@@ -30,17 +30,12 @@
     <ion-col size="2" class="flex--center">
       {{ result.linha.ativa ? 'ATIVA' : 'INATIVA' }}
     </ion-col>
-    <ion-col size="3" class="flex--center">
-      <ion-row>
-        <ion-col size="11">
-          <ion-label>Dias úteis:</ion-label> de {{ result.inicioDiaUtil }}h até {{ result.fimDiaUtil }}h;<br>
-          <ion-label>Sábados:</ion-label> de {{ result.inicioSabado }}h até {{ result.fimSabado }}h;<br>
-          <ion-label>Domingos e Feriados:</ion-label> de {{ result.inicioDomingoEFeriado }}h até {{ result.fimDomingoEFeriado }}h.
-        </ion-col>
-        <ion-col size="1">
-          <ion-button (click)="abrirModalHorarios(i)" color="primary"><ion-icon name="eye"></ion-icon></ion-button>
-        </ion-col>
-      </ion-row>
+    <ion-col size="3" class="flex--middle cursor-pointer background-color-link" (click)="abrirModalHorarios(i)">
+      <ul class="list">
+        <li><ion-label><span class="label--dia">Dias úteis</span>: {{ result.inicioDiaUtil }}h às {{ result.fimDiaUtil }}h;</ion-label></li>
+        <li><ion-label><span class="label--dia">Sábados</span>: {{ result.inicioSabado }}h às {{ result.fimSabado }}h;</ion-label></li>
+        <li><ion-label><span class="label--dia">Domingos e Feriados</span>: {{ result.inicioDomingoEFeriado }}h às {{ result.fimDomingoEFeriado }}h.</ion-label></li>
+      </ul>
     </ion-col>
     <ion-col size="1.5" class="flex--center">
       <ion-button (click)="abrirModal(i)" color="primary"><ion-icon name="eye"></ion-icon></ion-button>

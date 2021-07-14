@@ -1,7 +1,7 @@
 import { Linha } from "src/app/linhas/models/linhas.model";
 
 export interface Horario {
-    id: number;
+    id?: number;
     linha: Linha;
     inicioDiaUtil: string;
     inicioSabado: string;

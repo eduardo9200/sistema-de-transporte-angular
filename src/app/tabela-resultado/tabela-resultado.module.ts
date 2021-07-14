@@ -4,6 +4,7 @@ import { TabelaItinerariosComponent } from './components/tabela-itinerarios/tabe
 import { SharedModule } from '../shared/shared.module';
 import { TabelaLinhasComponent } from './components/tabela-linhas/tabela-linhas.component';
 import { TabelaHorariosComponent } from './components/tabela-horarios/tabela-horarios.component';
+import { TabelaHomeComponent } from './components/tabela-home/tabela-home.component';
 
 
 
@@ -11,7 +12,8 @@ import { TabelaHorariosComponent } from './components/tabela-horarios/tabela-hor
   declarations: [
     TabelaItinerariosComponent,
     TabelaLinhasComponent,
-    TabelaHorariosComponent
+    TabelaHorariosComponent,
+    TabelaHomeComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { TabelaHorariosComponent } from './components/tabela-horarios/tabela-hor
   exports: [
     TabelaItinerariosComponent,
     TabelaLinhasComponent,
-    TabelaHorariosComponent
+    TabelaHorariosComponent,
+    TabelaHomeComponent
   ]
 })
 export class TabelaResultadoModule { }

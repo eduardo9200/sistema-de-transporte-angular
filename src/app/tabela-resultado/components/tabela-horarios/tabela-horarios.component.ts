@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 import { CadastrarHorarioComponent } from 'src/app/horarios/components/cadastrar-horario/cadastrar-horario.component';
 import Swal from 'sweetalert2';
+import { DescricaoHorariosComponent } from 'src/app/horarios/components/descricao-horarios/descricao-horarios.component';
 
 @Component({
   selector: 'app-tabela-horarios',
@@ -28,13 +29,25 @@ export class TabelaHorariosComponent implements OnInit {
 
   public async abrirModal(i: number) {
     const loading = await this.overlayService.loading();
-    const horarioCadastrado = this.horarios[i];
+    const horarioCadastrado: Horario = this.horarios[i];
     this.chamarModal({
       component: CadastrarHorarioComponent,
       componentProps: {
         horarioCadastrado,
         openedFromTabela: true
       } 
+    });
+    loading.dismiss();
+  }
+
+  public async abrirModalHorarios(i: number) {
+    const loading = await this.overlayService.loading();
+    const horarioSelecionado: Horario = this.horarios[i];
+    this.chamarModal({
+      component: DescricaoHorariosComponent,
+      componentProps: {
+        horarioSelecionado
+      }
     });
     loading.dismiss();
   }

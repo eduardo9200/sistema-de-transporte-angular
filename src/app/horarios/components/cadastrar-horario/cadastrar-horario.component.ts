@@ -39,6 +39,7 @@ export class CadastrarHorarioComponent implements OnInit {
       this.disabled = true;
       this.showSecondButton = true;
       this.linhaSelecionada.disable();
+      this.setValoresFormulario();
     }
   }
 

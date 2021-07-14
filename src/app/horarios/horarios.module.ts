@@ -11,6 +11,7 @@ import { CadastrarHorarioComponent } from './components/cadastrar-horario/cadast
 import { SharedModule } from '../shared/shared.module';
 import { PesquisaModule } from '../pesquisa/pesquisa.module';
 import { TabelaResultadoModule } from '../tabela-resultado/tabela-resultado.module';
+import { DescricaoHorariosComponent } from './components/descricao-horarios/descricao-horarios.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,6 @@ import { TabelaResultadoModule } from '../tabela-resultado/tabela-resultado.modu
     PesquisaModule,
     TabelaResultadoModule
   ],
-  declarations: [HorariosPage, CadastrarHorarioComponent]
+  declarations: [HorariosPage, CadastrarHorarioComponent, DescricaoHorariosComponent]
 })
 export class HorariosPageModule {}

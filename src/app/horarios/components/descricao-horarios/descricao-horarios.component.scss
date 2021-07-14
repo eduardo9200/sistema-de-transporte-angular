@@ -1,0 +1,34 @@
+ion-col.hora {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px;
+    margin: 2px;
+    background-color: #ffe4c4;
+    border: 1px solid #000;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+ion-col.hora:hover {
+    background-color: #f0ffc4;
+}
+
+.label--dia, .label--linha {
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.label--linha {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    background-color: #f5deb3;
+}
+
+.margem-acima {
+    margin-top: 20px;
+}
