@@ -22,7 +22,7 @@
     </section>
   
     <section *ngIf="isMostrarResultado">
-      <app-tabela-linhas [linhas]="linhas" (deletarLinha)="deletarLinha($event)"></app-tabela-linhas>
+      <app-tabela-linhas [linhas]="linhas" [quantidadesTiposDeLinha]="quantidadesTiposDeLinha" (deletarLinha)="deletarLinha($event)"></app-tabela-linhas>
     </section>
   </ion-grid>
 </ion-content>

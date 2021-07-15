@@ -7,7 +7,7 @@ import { PesquisaBuilder } from '../pesquisa/services/pesquisa.builder';
 import { Horario } from './models/horarios.model';
 import { HorarioService } from './services/horario.service';
 import { CadastrarHorarioComponent } from './components/cadastrar-horario/cadastrar-horario.component';
-import { DadosBuscaLinha } from '../pesquisa/models/pesquisa.model';
+import { DadosBuscaLinha, TipoItemBuscaLinha } from '../pesquisa/models/pesquisa.model';
 
 @Component({
   selector: 'app-horarios',
@@ -35,6 +35,12 @@ export class HorariosPage implements OnInit {
 
     if(event.itemSelecionado == undefined && event.textoBusca == null) {
       event = this.pesquisaBuilder.getDadosBuscaTodasLinhas();
+    }
+
+    if(event.itemSelecionado.id !== TipoItemBuscaLinha.TODAS && event.textoBusca === null) {
+      loading.dismiss();
+      this.overlayService.toast({ message: 'Digite um texto no campo de pesquisa.' });
+      return;
     }
 
     this.horarioService

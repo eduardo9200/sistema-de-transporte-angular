@@ -4,9 +4,11 @@ import { ModalController } from '@ionic/angular';
 import { OverlayService } from '../core/services/overlay.service';
 import { Linha } from './models/linhas.model';
 import { LinhaService } from './services/linha.service';
-import { DadosBuscaLinha } from '../pesquisa/models/pesquisa.model';
+import { DadosBuscaLinha, TipoItemBuscaLinha } from '../pesquisa/models/pesquisa.model';
 import { PesquisaBuilder } from '../pesquisa/services/pesquisa.builder';
 import { CadastrarLinhaComponent } from './components/cadastrar-linha/cadastrar-linha.component';
+import { HomeService } from '../home/services/home.service';
+import { QuantidadesTiposDeLinha } from '../home/models/home.model';
 
 @Component({
   selector: 'app-linhas',
@@ -19,7 +21,8 @@ export class LinhasPage implements OnInit {
     private modalController: ModalController,
     private overlayService: OverlayService,
     private linhaService: LinhaService,
-    private pesquisaBuilder: PesquisaBuilder
+    private pesquisaBuilder: PesquisaBuilder,
+    private homeService: HomeService
   ) { }
 
   ngOnInit() {
@@ -28,12 +31,19 @@ export class LinhasPage implements OnInit {
   isMostrarResultado: boolean = false;
   modal: HTMLIonModalElement;
   linhas: Linha[];
+  quantidadesTiposDeLinha: QuantidadesTiposDeLinha[];
 
   public async buscar(event: DadosBuscaLinha) {
     const loading = await this.overlayService.loading();
 
     if(event.itemSelecionado == undefined && event.textoBusca == null) {
       event = this.pesquisaBuilder.getDadosBuscaTodasLinhas();
+    }
+
+    if(event.itemSelecionado.id !== TipoItemBuscaLinha.TODAS && event.textoBusca === null) {
+      loading.dismiss();
+      this.overlayService.toast({ message: 'Digite um texto no campo de pesquisa.' });
+      return;
     }
 
     this.linhaService
@@ -46,6 +56,10 @@ export class LinhasPage implements OnInit {
       this.overlayService.toast({ message: `Ops! Falha na busca de uma linha.` });
       loading.dismiss();
     });
+
+    this.homeService
+    .buscaQuantidadesTiposDeLinha()
+    .subscribe(qtdList => this.quantidadesTiposDeLinha = qtdList);
   }
 
   public async deletarLinha(event: Linha) {

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Sentido } from '../itinerarios/models/itinerario.model';
-import { Linha, TipoLinha } from '../linhas/models/linhas.model';
 import { TabelaHome } from './models/home.model';
 import { HomeService } from './services/home.service';
 

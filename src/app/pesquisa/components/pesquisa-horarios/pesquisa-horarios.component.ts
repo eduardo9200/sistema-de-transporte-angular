@@ -24,7 +24,6 @@ export class PesquisaHorariosComponent implements OnInit {
   }
 
   searchItemList: SearchItemLinha[] = [];
-  itemSelecionado: SearchItemLinha;
   valorPesquisa: string = '';
   inputType: string = "text";
 
@@ -32,8 +31,13 @@ export class PesquisaHorariosComponent implements OnInit {
   
   private criaFormulario() {
     this.formPesquisa = this.formBuilder.group({
+      opcaoPesquisa: [null],
       textoPesquisa: [null]
     });
+  }
+
+  get opcaoPesquisa(): FormControl {
+    return this.formPesquisa.get('opcaoPesquisa') as FormControl;
   }
 
   get textoPesquisa(): FormControl {
@@ -41,18 +45,24 @@ export class PesquisaHorariosComponent implements OnInit {
   }
 
   public selecionouPesquisa(event) {
-    this.itemSelecionado = event.detail.value;
+    const idItemSelecionado = event.detail.value.id;
     
-    if(this.itemSelecionado.id === TipoItemBuscaLinha.NUMERO) {
+    if(idItemSelecionado === TipoItemBuscaLinha.NUMERO) {
       this.inputType = "number";
     } else {
       this.inputType = "text";
+    }
+
+    if(idItemSelecionado === TipoItemBuscaLinha.TODAS) {
+      this.textoPesquisa.disable();
+    } else {
+      this.textoPesquisa.enable();
     }
   }
 
   public pesquisar() {
     this.dadosBusca.emit({
-      itemSelecionado: this.itemSelecionado,
+      itemSelecionado: this.opcaoPesquisa.value,
       textoBusca: this.textoPesquisa.value
     });
   }

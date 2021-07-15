@@ -13,7 +13,6 @@ export class PesquisaItinerarioComponent implements OnInit {
   @Output() dadosBusca = new EventEmitter<DadosBusca>();
 
   searchItemList: SearchItem[] = [];
-  itemSelecionado: SearchItem;
   valorPesquisa: string = '';
   inputType: string = "text";
 
@@ -31,8 +30,13 @@ export class PesquisaItinerarioComponent implements OnInit {
 
   private criaFormulario() {
     this.formPesquisa = this.formBuilder.group({
+      opcaoPesquisa: [null],
       textoPesquisa: [null]
     });
+  }
+
+  get opcaoPesquisa(): FormControl {
+    return this.formPesquisa.get('opcaoPesquisa') as FormControl;
   }
 
   get textoPesquisa(): FormControl {
@@ -40,18 +44,24 @@ export class PesquisaItinerarioComponent implements OnInit {
   }
 
   public selecionouPesquisa(event) {
-    this.itemSelecionado = event.detail.value;
-    
-    if(this.itemSelecionado.id === TipoItemBusca.NUMERO) {
+    const idItemSelecionado = event.detail.value.id;
+
+    if(idItemSelecionado === TipoItemBusca.NUMERO) {
       this.inputType = "number";
     } else {
       this.inputType = "text";
+    }
+
+    if(idItemSelecionado === TipoItemBusca.TODOS) {
+      this.textoPesquisa.disable();
+    } else {
+      this.textoPesquisa.enable();
     }
   }
 
   public pesquisar() {
     this.dadosBusca.emit({
-      itemSelecionado: this.itemSelecionado,
+      itemSelecionado: this.opcaoPesquisa.value,
       textoBusca: this.textoPesquisa.value
     });
   }

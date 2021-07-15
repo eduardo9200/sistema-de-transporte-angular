@@ -11,7 +11,7 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-radio-group (ionChange)="selecionouPesquisa($event)">
+          <ion-radio-group (ionChange)="selecionouPesquisa($event)" formControlName="opcaoPesquisa">
             <ion-list-header class="ion-no-margin ion-no-padding">
               <ion-label>Pesquisa por:</ion-label>
             </ion-list-header>
@@ -21,7 +21,7 @@
                 size-lg="1.5"
                 size-xs="12"
                 class="ion-no-padding ion-no-margin"
-                *ngFor="let item of searchItemList"
+                *ngFor="let item of searchItemList; let i = index"
               >
                 <ion-item lines="none" class="ion-no-padding ion-no-margin">
                   <ion-label class="pesquisa--label">{{ item.descricao }}</ion-label>

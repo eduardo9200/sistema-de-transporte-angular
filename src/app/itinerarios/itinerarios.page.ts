@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalOptions } from '@ionic/core';
 import { ModalController } from '@ionic/angular';
-import { DadosBusca } from '../pesquisa/models/pesquisa.model';
+import { DadosBusca, TipoItemBusca } from '../pesquisa/models/pesquisa.model';
 import { ItinerarioService } from './services/itinerario.service';
 import { CadastrarItinerarioComponent } from './components/cadastrar-itinerario/cadastrar-itinerario.component';
 import { Linha } from '../linhas/models/linhas.model';
@@ -35,6 +35,12 @@ export class ItinerariosPage implements OnInit {
 
     if(event.itemSelecionado == undefined && event.textoBusca == null) {
       event = this.pesquisaBuilder.getDadosBuscaTodos();
+    }
+
+    if(event.itemSelecionado.id !== TipoItemBusca.TODOS && event.textoBusca === null) {
+      loading.dismiss();
+      this.overlayService.toast({ message: 'Digite um texto no campo de pesquisa.' });
+      return;
     }
 
     this.itinerarioService

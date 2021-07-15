@@ -27,17 +27,44 @@
       {{ result.linha.nome }}
     </ion-col>
     <ion-col size="3.5" class="flex--center">
-      {{ result.itinerario.resumo }}
+      <span *ngIf="result.itinerario.resumo !== null; else mostraNada">
+        {{ result.itinerario.resumo }}
+      </span>
     </ion-col>
-    <ion-col size="3.5" class="flex--middle ion-no-padding">
+    <ion-col size="3.5" class="flex--middle ion-no-padding cursor-pointer background-color-link" (click)="abrirModalHorarios(i)">
         <ul class="list">
-          <li><ion-label><span class="label--dia">Dias úteis</span>: {{ result.horario.inicioDiaUtil }}h às {{ result.horario.fimDiaUtil }}h;</ion-label></li>
-          <li><ion-label><span class="label--dia">Sábados</span>: {{ result.horario.inicioSabado }}h às {{ result.horario.fimSabado }}h;</ion-label></li>
-          <li><ion-label><span class="label--dia">Domingos e Feriados</span>: {{ result.horario.inicioDomingoEFeriado }}h às {{ result.horario.fimDomingoEFeriado }}h.</ion-label></li>
+          <li>
+            <ion-label>
+              <span class="label--dia">Dias úteis</span>:
+              <span *ngIf="result.horario.inicioDiaUtil !== null || result.horario.fimDiaUtil !== null; else mostraNada">
+                {{ result.horario.inicioDiaUtil }}h às {{ result.horario.fimDiaUtil }}h;
+              </span>
+            </ion-label>
+          </li>
+          <li>
+            <ion-label>
+              <span class="label--dia">Sábados</span>:
+              <span *ngIf="result.horario.inicioSabado !== null || result.horario.fimSabado !== null; else mostraNada">
+                {{ result.horario.inicioSabado }}h às {{ result.horario.fimSabado }}h;
+              </span>
+            </ion-label>
+          </li>
+          <li>
+            <ion-label>
+              <span class="label--dia">Domingos e Feriados</span>:
+              <span *ngIf="result.horario.inicioDomingoEFeriado !== null || result.horario.fimDomingoEFeriado !== null; else mostraNada">
+                {{ result.horario.inicioDomingoEFeriado }}h às {{ result.horario.fimDomingoEFeriado }}h.
+              </span>
+            </ion-label>
+          </li>
         </ul>
     </ion-col>
   </ion-row>
 </ion-grid>
+
+<ng-template #mostraNada>
+  <span>-</span>
+</ng-template>
 
 <ng-template #semResultados>
   <ion-grid>

@@ -11,6 +11,10 @@ export class PesquisaBuilder {
   public getSearchOptions(): SearchItem[] {
     return [
       {
+        id: TipoItemBusca.TODOS,
+        descricao: 'Todos'
+      },
+      {
         id: TipoItemBusca.NUMERO,
         descricao: 'Número'
       },
@@ -34,6 +38,10 @@ export class PesquisaBuilder {
 
   public getSearchOptionsLinha(): SearchItemLinha[] {
     return [
+      {
+        id: TipoItemBuscaLinha.TODAS,
+        descricao: 'Todos'
+      },
       {
         id: TipoItemBuscaLinha.NUMERO,
         descricao: 'Número'

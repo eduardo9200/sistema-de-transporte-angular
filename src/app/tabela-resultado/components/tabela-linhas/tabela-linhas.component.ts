@@ -5,6 +5,7 @@ import { OverlayService } from 'src/app/core/services/overlay.service';
 import { CadastrarLinhaComponent } from 'src/app/linhas/components/cadastrar-linha/cadastrar-linha.component';
 import { Linha } from 'src/app/linhas/models/linhas.model';
 import Swal from 'sweetalert2';
+import { QuantidadesTiposDeLinha } from 'src/app/home/models/home.model';
 
 @Component({
   selector: 'app-tabela-linhas',
@@ -14,6 +15,7 @@ import Swal from 'sweetalert2';
 export class TabelaLinhasComponent implements OnInit {
 
   @Input() linhas: Linha[];
+  @Input() quantidadesTiposDeLinha: QuantidadesTiposDeLinha[];
   @Output() deletarLinha = new EventEmitter<Linha>();
 
   modal: HTMLIonModalElement;

@@ -20,9 +20,32 @@ export class DescricaoHorariosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.montaDiasUteis();
-    this.montaSabados();
-    this.montaDomingosEFeriados();
+    if(this.validaDiaUtil())
+      this.montaDiasUteis();
+    if(this.validaSabado())
+      this.montaSabados();
+    if(this.validaDomingoEFeriado())
+      this.montaDomingosEFeriados();
+
+      console.log(this.horariosDiaUtil.length);
+  }
+
+  private validaDiaUtil(): boolean {
+    return this.horarioSelecionado.inicioDiaUtil !== null && this.horarioSelecionado.inicioDiaUtil !== undefined
+        && this.horarioSelecionado.fimDiaUtil !== null && this.horarioSelecionado.fimDiaUtil !== undefined
+        && this.horarioSelecionado.intervaloDiaUtil !== null;
+  }
+
+  private validaSabado(): boolean {
+    return this.horarioSelecionado.inicioSabado !== null && this.horarioSelecionado.inicioSabado !== undefined
+        && this.horarioSelecionado.fimSabado !== null && this.horarioSelecionado.fimSabado !== undefined
+        && this.horarioSelecionado.intervaloSabado !== null;
+  }
+
+  private validaDomingoEFeriado(): boolean {
+    return this.horarioSelecionado.inicioDomingoEFeriado !== null && this.horarioSelecionado.inicioDomingoEFeriado !== undefined
+        && this.horarioSelecionado.fimDomingoEFeriado !== null && this.horarioSelecionado.fimDomingoEFeriado !== undefined
+        && this.horarioSelecionado.intervaloDomingoEFeriado !== null;
   }
 
   private montaDiasUteis() {

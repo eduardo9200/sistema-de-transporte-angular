@@ -56,15 +56,15 @@ export class CadastrarHorarioComponent implements OnInit {
   private criarFormulario() {
     this.formCadastro = this.formBuilder.group({
       linhaSelecionada: [null, Validators.required],
-      uteisInicio: [null, Validators.required],
-      uteisFim: [null, Validators.required],
-      uteisIntervalo: [null, Validators.required],
-      sabadosInicio: [null, Validators.required],
-      sabadosFim: [null, Validators.required],
-      sabadosIntervalo: [null, Validators.required],
-      domingosInicio: [null, Validators.required],
-      domingosFim: [null, Validators.required],
-      domingosIntervalo: [null, Validators.required]
+      uteisInicio: [null],
+      uteisFim: [null],
+      uteisIntervalo: [null],
+      sabadosInicio: [null],
+      sabadosFim: [null],
+      sabadosIntervalo: [null],
+      domingosInicio: [null],
+      domingosFim: [null],
+      domingosIntervalo: [null]
     });
   }
 
