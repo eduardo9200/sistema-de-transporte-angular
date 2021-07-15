@@ -1,13 +1,14 @@
 <ion-grid>
-  <ion-row *ngIf="linhas?.length > 0; else semResultados">
-    <ion-col size="4">
-      {{ linhas.length }} {{ linhas.length == 1 ? 'resultado' : 'resultados' }}
+  <ion-row>
+    <ion-col size="2" class="label--qtde ion-no-padding">
+      {{ linhas?.length ? linhas.length : '0' }} {{ linhas?.length == 1 ? 'resultado' : 'resultados' }}
     </ion-col>
-    <ion-col size="8">
-      <ion-row>
-        <ion-col>Qtde. dos Tipos de Linhas:</ion-col>
-        <ion-col *ngFor="let qtd of quantidadesTiposDeLinha">
-          {{ qtd.tipo | removeUnderline }}: {{ qtd.quantidade }} {{ qtd.quantidade === 1 ? 'linha' : 'linhas' }};
+    <ion-col size="10">
+      <ion-row class="ion-justify-content-end">
+        <ion-col class="col--qtde" size="2.4">Qtde. de Linhas por Tipo:</ion-col>
+        <ion-col class="col--tipo cursor-pointer" size="1.5" (click)="filtrarPorTipo(-1)">TODAS: {{ bkpLinhas?.length }}</ion-col>
+        <ion-col *ngFor="let qtd of quantidadesTiposDeLinha; let i = index" class="col--tipo cursor-pointer" size="1.9" (click)="filtrarPorTipo(i)">
+          {{ qtd.tipo | removeUnderline }}: {{ qtd.quantidade }}
         </ion-col>
       </ion-row>
     </ion-col>
@@ -46,11 +47,3 @@
     </ion-col>
   </ion-row>
 </ion-grid>
-
-<ng-template #semResultados>
-  <ion-grid>
-    <ion-row>
-      <ion-col>Sem resultados</ion-col>
-    </ion-row>
-  </ion-grid>  
-</ng-template>

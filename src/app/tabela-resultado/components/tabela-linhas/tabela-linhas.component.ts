@@ -18,6 +18,8 @@ export class TabelaLinhasComponent implements OnInit {
   @Input() quantidadesTiposDeLinha: QuantidadesTiposDeLinha[];
   @Output() deletarLinha = new EventEmitter<Linha>();
 
+  bkpLinhas: Linha[] = [];
+
   modal: HTMLIonModalElement;
 
   constructor(
@@ -25,7 +27,9 @@ export class TabelaLinhasComponent implements OnInit {
     private overlayService: OverlayService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.bkpLinhas = this.linhas;
+  }
 
   public async abrirModal(i: number) {
     const loading = await this.overlayService.loading();
@@ -38,6 +42,14 @@ export class TabelaLinhasComponent implements OnInit {
       } 
     });
     loading.dismiss();
+  }
+
+  public filtrarPorTipo(i: number): void {
+    if(i === -1)
+      this.linhas = this.bkpLinhas;
+    else
+      this.linhas = this.bkpLinhas.filter(linha => linha.tipo === this.quantidadesTiposDeLinha[i].tipo);
+    this.ordenaPorNome();
   }
 
   public ordenaPorNumero(): void {

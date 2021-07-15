@@ -35,3 +35,33 @@
 ion-col.cursor-pointer:hover {
     cursor: pointer;
 }
+
+.label--qtde {
+    display: flex;
+    align-items: flex-end;
+}
+
+.col--qtde {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-weight: bold;
+    font-size: 9pt;
+}
+
+.col--tipo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #000;
+    border-radius: 3px;
+    background-color: #f5deb3;
+    font-size: 9pt;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.col--tipo:hover {
+    background-color: #f0ffc4;
+}
